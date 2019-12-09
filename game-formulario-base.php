@@ -1,6 +1,6 @@
             <tr>
                 <td>Nome</td>
-                <td> <input class="form-control" type="text" name="nome" value="<?=$game['nome']?>" required></td>
+                <td><input class="form-control" type="text" name="nome" value="<?=$game['nome']?>" required></td>
             </tr>
             <tr>
                 <td>Gênero</td>

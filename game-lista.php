@@ -1,6 +1,7 @@
-<?php include("cabecalho.php"); 
-include("conecta.php");
-include("banco-game.php"); 
+<?php 
+	include("cabecalho.php"); 
+	include("conecta.php");
+	include("banco-game.php"); 
 ?>
 
 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
@@ -15,10 +16,10 @@ include("banco-game.php");
 </form>
 
 <?php 
-$query = "select * from tbl_games where status = true";
-$resultado = mysqli_query($conexao, $query);
-$qtde = mysqli_num_rows($resultado);
-echo "<b>Jogos concluídos: </b>".$qtde."<br>";
+	$query = "select * from tbl_games where status = true";
+	$resultado = mysqli_query($conexao, $query);
+	$qtde = mysqli_num_rows($resultado);
+	echo "<b>Jogos concluídos: </b>".$qtde."<br>";
 ?>
 
 <?php
@@ -42,22 +43,23 @@ echo "<b>Jogos concluídos: </b>".$qtde."<br>";
         array_push($games, $game);
     }
 		
-	?>
+?>
 		
 	<table class="table table-striped table-bordered">
 	<?php
-	$pesquisar = $_POST['pesquisar'];
-	$busca = filtrarGameConcluido($conexao, $pesquisar);
+		$pesquisar = $_POST['pesquisar'];
+		$busca = filtrarGameConcluido($conexao, $pesquisar);
 
-	if($pesquisar != null){
-		foreach($busca as $game){ ?>
-	<tr>
-		<td><?= $game['nome'] ?></td>
-		<td><?= utf8_encode($game['genero_nome']) ?></td>
-		<td><?= substr($game['descricao'],0,40) ?></td>
-		<td><?= $game['plataforma_nome'] ?></td>
-		<td><a href="game-altera-formulario.php?id=<?=$game['id']?>"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a></td> 
-		<td><a href="remove-game.php?id=<?= $game['id']?>"><span class="glyphicon glyphicon-trash text-danger" aria-hidden="true"></span></a></td>
+		if($pesquisar != null){
+			foreach($busca as $game){ ?>
+
+		<tr>
+			<td><?= $game['nome'] ?></td>
+			<td><?= utf8_encode($game['genero_nome']) ?></td>
+			<td><?= substr($game['descricao'],0,40) ?></td>
+			<td><?= $game['plataforma_nome'] ?></td>
+			<td><a href="game-altera-formulario.php?id=<?=$game['id']?>"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a></td> 
+			<td><a href="remove-game.php?id=<?= $game['id']?>"><span class="glyphicon glyphicon-trash text-danger" aria-hidden="true"></span></a></td>
 		</tr>
 
 	<?php
@@ -87,16 +89,16 @@ echo "<b>Jogos concluídos: </b>".$qtde."<br>";
 
 		
 	<?php
-	//Paginção - Somar a quantidade de games
-	$result_pg = "SELECT COUNT(*) AS num_result FROM tbl_games where status = true";
-	$resultado_pg = mysqli_query($conexao, $result_pg);
-	$row_pg = mysqli_fetch_assoc($resultado_pg);
-	//echo $row_pg['num_result'];
-	//Quantidade de pagina 
-	$quantidade_pg = ceil($row_pg['num_result'] / $qnt_result_pg);
-		
-	//Limitar os link antes depois
-	$max_links = 2;
+		//Paginção - Somar a quantidade de games
+		$result_pg = "SELECT COUNT(*) AS num_result FROM tbl_games where status = true";
+		$resultado_pg = mysqli_query($conexao, $result_pg);
+		$row_pg = mysqli_fetch_assoc($resultado_pg);
+		//echo $row_pg['num_result'];
+		//Quantidade de pagina 
+		$quantidade_pg = ceil($row_pg['num_result'] / $qnt_result_pg);
+			
+		//Limitar os link antes depois
+		$max_links = 2;
 	
 ?>		
 

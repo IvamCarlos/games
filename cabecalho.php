@@ -1,6 +1,6 @@
 <?php
-error_reporting(E_ALL ^ E_NOTICE);
-include("mostra-alerta.php"); ?>
+  error_reporting(E_ALL ^ E_NOTICE);
+  include("mostra-alerta.php"); ?>
 <html>
 <head>
     <title>Remember games finished</title>

@@ -1,16 +1,16 @@
 <?php
-session_start();
-function mostraAlerta($tipo){
-	if(isset($_SESSION['tipo'])){ ?>
+	session_start();
+	function mostraAlerta($tipo){
+		if(isset($_SESSION['tipo'])){ ?>
 <p class="alert-<?= $tipo ?>"><?= $_SESSION[$tipo]?>
 	
 <?php 
-unset($_SESSION[$tipo]); 
-	}
-} 
+			unset($_SESSION[$tipo]); 
+		}
+	} 
 ?>
 
 <?php 
-mostraAlerta("sucess");
-mostraAlerta("danger");
+	mostraAlerta("sucess");
+	mostraAlerta("danger");
 ?>

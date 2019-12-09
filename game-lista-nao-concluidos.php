@@ -1,6 +1,7 @@
-<?php include("cabecalho.php"); 
-include("conecta.php");
-include("banco-game.php"); 
+<?php 
+	include("cabecalho.php"); 
+	include("conecta.php");
+	include("banco-game.php"); 
 ?>
 
 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
@@ -15,10 +16,10 @@ include("banco-game.php");
 </form>
 
 <?php 
-$query = "select * from tbl_games where status = false";
-$resultado = mysqli_query($conexao, $query);
-$qtde = mysqli_num_rows($resultado);
-echo "<b>Jogos não concluídos: </b>".$qtde."<br>";
+	$query = "select * from tbl_games where status = false";
+	$resultado = mysqli_query($conexao, $query);
+	$qtde = mysqli_num_rows($resultado);
+	echo "<b>Jogos não concluídos: </b>".$qtde."<br>";
 ?>
 
 <?php
@@ -40,47 +41,48 @@ echo "<b>Jogos não concluídos: </b>".$qtde."<br>";
 
     while($game = mysqli_fetch_assoc($resultado)) {
         array_push($games, $game);
-    }
-
-		
+    }	
 ?>
 
 <table class="table table-striped table-bordered">
 <?php
-$pesquisar = $_POST['pesquisar'];
-$games = listaGamesNaoConcluidos($conexao);
-$busca = filtrarGameNaoConcluido($conexao, $pesquisar);
+	$pesquisar = $_POST['pesquisar'];
+	$games = listaGamesNaoConcluidos($conexao);
+	$busca = filtrarGameNaoConcluido($conexao, $pesquisar);
 
-if($pesquisar != null){
-	foreach($busca as $game){ ?>
-<tr>
-    <td><?= $game['nome'] ?></td>
-    <td><?= utf8_encode($game['genero_nome']) ?></td>
-    <td><?= substr($game['descricao'],0,40) ?></td>
-    <td><?= $game['plataforma_nome'] ?></td>
-    <td><a href="game-altera-formulario.php?id=<?=$game['id']?>"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a></td> 
-	<td><a href="remove-game.php?id=<?= $game['id']?>"><span class="glyphicon glyphicon-trash text-danger" aria-hidden="true"></span></a></td>
-</tr>
+	if($pesquisar != null){
+		foreach($busca as $game){ ?>
+
+	<tr>
+		<td><?= $game['nome'] ?></td>
+		<td><?= utf8_encode($game['genero_nome']) ?></td>
+		<td><?= substr($game['descricao'],0,40) ?></td>
+		<td><?= $game['plataforma_nome'] ?></td>
+		<td><a href="game-altera-formulario.php?id=<?=$game['id']?>"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a></td> 
+		<td><a href="remove-game.php?id=<?= $game['id']?>"><span class="glyphicon glyphicon-trash text-danger" aria-hidden="true"></span></a></td>
+	</tr>
 
 <?php
 }
 ?>
 <?php }else{
 	foreach($games as $game){ ?>
-<tr>
-    <td><?= $game['nome'] ?></td>
-    <td><?= utf8_encode($game['genero_nome']) ?></td>
-    <td><?= substr($game['descricao'],0,40) ?></td>
-    <td><?= $game['plataforma_nome'] ?></td>
-     <td><a href="game-altera-formulario.php?id=<?=$game['id']?>"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a></td> 
-	<td><a href="remove-game.php?id=<?= $game['id']?>"><span class="glyphicon glyphicon-trash text-danger" aria-hidden="true"></span></a></td>
-</tr>
+
+	<tr>
+		<td><?= $game['nome'] ?></td>
+		<td><?= utf8_encode($game['genero_nome']) ?></td>
+		<td><?= substr($game['descricao'],0,40) ?></td>
+		<td><?= $game['plataforma_nome'] ?></td>
+		<td><a href="game-altera-formulario.php?id=<?=$game['id']?>"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span></a></td> 
+		<td><a href="remove-game.php?id=<?= $game['id']?>"><span class="glyphicon glyphicon-trash text-danger" aria-hidden="true"></span></a></td>
+	</tr>
+
 <?php 
-}
+	}
 } 
 
-if($pesquisar != $busca && $pesquisar != null && $game == null){ ?>
-	<span class="text-info">Game não encontrado!</span>
+	if($pesquisar != $busca && $pesquisar != null && $game == null){ ?>
+		<span class="text-info">Game não encontrado!</span>
 <?php }
 ?> 
 	

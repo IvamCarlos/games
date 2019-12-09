@@ -1,17 +1,18 @@
-<?php include("cabecalho.php"); 
-include("conecta.php");
-include("banco-plataforma.php");
-include("banco-genero.php");
-include("banco-game.php");
-include("logica-usuario.php");
+<?php 
+    include("cabecalho.php"); 
+    include("conecta.php");
+    include("banco-plataforma.php");
+    include("banco-genero.php");
+    include("banco-game.php");
+    include("logica-usuario.php");
 
-verificaUsuario();
+    verificaUsuario();
 
-$id = $_GET['id'];
-$game = buscaGame($conexao, $id);
-$generos = listaGeneros($conexao);
-$plataformas = listaPlataformas($conexao);
-$status = $game['status'] ? "checked='checked'" : "";
+    $id = $_GET['id'];
+    $game = buscaGame($conexao, $id);
+    $generos = listaGeneros($conexao);
+    $plataformas = listaPlataformas($conexao);
+    $status = $game['status'] ? "checked='checked'" : "";
 ?>            
     <h1>Alterando game</h1>
     <form action="altera-game.php" method="post">
